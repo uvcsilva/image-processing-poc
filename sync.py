@@ -1,7 +1,7 @@
 import requests
 import time
 
-SIZE_TO_SEND=250
+SIZE_TO_SEND=1000
 count = 0
 start = time.time()
 for i in range(SIZE_TO_SEND):
