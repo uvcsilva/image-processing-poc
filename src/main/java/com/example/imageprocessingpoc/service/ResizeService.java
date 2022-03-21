@@ -43,10 +43,18 @@ public class ResizeService {
 
     private Metadata resizeImage(MultipartFile multipartFile, String outputPathWithName) throws IOException {
 
-        //Scalr.resize(srcImg, Scalr.Method.SPEED, Scalr.Mode.AUTOMATIC, 300, 300, Scalr.OP_DARKER);
+        //Scalr.resize(); Scalr.crop(); Scalr.pad(); Scalr.rotate();
 
+        //Scalr.Method.AUTOMATIC; Scalr.Method.BALANCED; Scalr.Method.QUALITY; Scalr.Method.SPEED;
+        //Scalr.Method.ULTRA_QUALITY;
+
+        //Scalr.Mode.AUTOMATIC; Scalr.Mode.FIT_EXACT; Scalr.Mode.FIT_TO_HEIGHT; Scalr.Mode.FIT_TO_WIDTH;
+
+        //Scalr.OP_ANTIALIAS; Scalr.OP_BRIGHTER; Scalr.OP_DARKER; Scalr.OP_GRAYSCALE;
+        
         BufferedImage srcImg = ImageIO.read(multipartFile.getInputStream());
-        BufferedImage destImg = Scalr.resize(srcImg, 400);
+        BufferedImage destImg = Scalr.resize(srcImg, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.AUTOMATIC, 600,
+                400, Scalr.OP_ANTIALIAS);
         File resizedImageFile = new File(outputPathWithName.concat("/resized.jpg"));
         ImageIO.write(destImg, "jpg", resizedImageFile);
         Metadata metadata = getMetadata(multipartFile, destImg);
